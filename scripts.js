@@ -9,8 +9,9 @@ agregarTODO.addEventListener("click", function() {
 
     let checkbox = document.createElement("input");
 
-    let input = document.createElement("input");
-    
+    var input = document.createElement("input");
+
+    var seTocoElBoton = true;
     divTask.id = "task";
     divTask.className = "input-group mb-3";
     divForm.className = "input-group-text";
@@ -26,6 +27,15 @@ agregarTODO.addEventListener("click", function() {
     div.appendChild(checkbox);
     document.body.appendChild(divTask);
     console.log(divTask);
+    checkbox.addEventListener("click", function() {
+        if(seTocoElBoton) {
+            input.style.textDecoration = "line-through";
+            seTocoElBoton = false;
+        } else {
+            input.style.textDecoration = "none";
+            seTocoElBoton = true;
+        }
+    })
 } )
 
 
