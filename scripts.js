@@ -1,6 +1,9 @@
+
 let agregarTODO = document.getElementById("agregarTODO");
 
-agregarTODO.addEventListener("click", function() {
+agregarTODO.addEventListener("click", function getValue(inputTask) {
+    inputTask = document.getElementById("inputTask").value;
+
     let divTask = document.createElement("div");
 
     let divForm = document.createElement("div");
@@ -9,7 +12,7 @@ agregarTODO.addEventListener("click", function() {
 
     let checkbox = document.createElement("input");
 
-    var input = document.createElement("input");
+    var text = document.createElement("label");
 
     var seTocoElBoton = true;
     divTask.id = "task";
@@ -18,21 +21,23 @@ agregarTODO.addEventListener("click", function() {
     checkbox.type = "checkbox";
     checkbox.className = "form-check-input mt-0";
     checkbox.ariaLabel = "Checkbox for following text input";
-    input.type = "text";
-    input.className = "form-control";
-    input.ariaLabel = "Text input with checkbox";
-    divTask.appendChild(divForm);
-    divTask.appendChild(input);
-    divForm.appendChild(div);
-    div.appendChild(checkbox);
-    document.body.appendChild(divTask);
-    console.log(divTask);
+    text.className = "p-3 bg-info bg-opacity-10 border border-info border-start-0 rounded-end"
+    if (inputTask != "") {
+        text.innerHTML = inputTask;
+        divTask.appendChild(divForm);
+        divTask.appendChild(text);
+        divForm.appendChild(div);
+        div.appendChild(checkbox);
+        document.body.appendChild(divTask);
+        console.log(divTask);
+    }
+    
     checkbox.addEventListener("click", function() {
         if(seTocoElBoton) {
-            input.style.textDecoration = "line-through";
+            text.style.textDecoration = "line-through";
             seTocoElBoton = false;
         } else {
-            input.style.textDecoration = "none";
+            text.style.textDecoration = "none";
             seTocoElBoton = true;
         }
     })
