@@ -3,7 +3,7 @@ let agregarTODO = document.getElementById("agregarTODO");
 let arrayTask = [];
 
     agregarTODO.onclick = () => {
-
+        arrayTask.splice(0);
         console.log(arrayTask);
         let inputTask = document.getElementById("inputTask").value
 
@@ -44,6 +44,7 @@ let arrayTask = [];
             }
         })
         arrayTask.forEach(item => {
+            console.log(item)
             let inputTask = item;
         
             let divTask = document.createElement("div");
