@@ -2,9 +2,7 @@
 let agregarTODO = document.getElementById("agregarTODO");
 let tareasDiv = document.getElementById("tareas");
 let botonTareaMasRapida = document.getElementById("tareaMasRapida");
-
 let arrayTask = [];
-
     agregarTODO.onclick = () => {
         tareasDiv.innerHTML = "";
 
@@ -34,11 +32,8 @@ let arrayTask = [];
             divTask.appendChild(text);
             divForm.appendChild(div);
             div.appendChild(checkbox);
-            var today = new Date();
-            var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-            var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-            var dateTime = date+' '+time;
-            arrayTask.push({texto: inputTask, fechaCreacion: dateTime, estado:false, fechaTachado: null});
+            var fechaCreacionTiempo = new Date();
+            arrayTask.push({texto: inputTask, fechaCreacion: fechaCreacionTiempo, estado:false, fechaTachado: null});
             console.log(arrayTask)
         }
         arrayTask.forEach(item => {
@@ -78,11 +73,7 @@ let arrayTask = [];
                 item.estado = !item.estado;
                 if(item.estado) {
                     text.style.textDecoration = "line-through";
-                    var today = new Date();
-                    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-                    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-                    var dateTime = date+' '+time;
-                    item.fechaTachado = dateTime;
+                    item.fechaTachado = new Date();
                     console.log(arrayTask);
                 } 
                 if(!item.estado)
@@ -96,19 +87,20 @@ let arrayTask = [];
 }
 
 botonTareaMasRapida.onclick = () => {
+    let tiempoMenor = 9999999999999;
+    let tareaMenor;
     arrayTask.forEach(item => {
-        let fechaTachadoMen = new Date(2023, 12, 31, 23, 59, 59)
-        console.log(fechaTachadoMen)
-        console.log(item.fechaTachado)
         if(item.fechaTachado != null)
         {
-            console.log(Number(fechaTachadoMen - item.fechaTachado))
-            if (item.fechaTachado < fechaTachadoMen) {
-                fechaMasRapida2 = item.fechaTachadoMen
+            let tiempoEnRealizarse = item.fechaTachado - item.fechaCreacion;
+            console.log(tiempoEnRealizarse);
+            if (tiempoEnRealizarse < tiempoMenor) {
+                tiempoMenor = tiempoEnRealizarse;
+                tareaMenor = item;
             }
         }
     })
-
+    tareaRapida = document.getElementById("textoTareaRapida")
+    tareaRapida.innerHTML = 'La tarea mas rapida fue'+' ' +tareaMenor.texto;
 }
-
 
